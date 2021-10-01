@@ -1,0 +1,12 @@
+{
+  "name": "life360",
+  "version": "1.0.0",
+  "description": "Type-safe JavaScript library to unofficially interact with the Life360 API.",
+  "main": "src/index.ts",
+  "repository": "https://github.com/jacc/life360",
+  "author": "Jack LaFond <jack.lafond@icloud.com>",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^3.0.0"
+  }
+}
