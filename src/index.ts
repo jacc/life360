@@ -16,12 +16,14 @@ export default class Life360 {
     });
   }
 
+  // TODO: return array of typed circle objects
   public async getCircles(): Promise<[Life360Circle]> {
     const response = await this.get(`circles`);
     const data = await response.json();
     return data as [Life360Circle];
   }
 
+  // TODO: return typed circle object
   public async getCircle(circleID: string): Promise<Life360Circle> {
     const response = await this.get(`circles/${circleID}`);
     const data = await response.json();
