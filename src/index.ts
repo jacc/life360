@@ -1,5 +1,5 @@
 import fetch, { Response } from "node-fetch";
-import { Life360User } from "./users.types";
+import { Life360User } from "./types/users.types";
 
 export default class Life360 {
   private readonly token: string;
