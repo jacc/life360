@@ -1,6 +1,9 @@
 import fetch from 'node-fetch';
 import {Life360Circle} from './types/circles.types';
+import {Life360CircleLocations} from './types/location.types';
+import {Life360CirclePlaces} from './types/places.types';
 import {Life360User} from './types/users.types';
+import {Life360UserTrips} from './types/trip.types';
 
 export class Life360API {
 	private readonly token;
@@ -26,6 +29,30 @@ export class Life360API {
 	}
 
 	/**
+	 * Gets all places added in a circle
+	 * @param circleId The ID of the circle
+	 */
+	async getCirclePlaces(circleId: string) {
+		return this.get<Life360CirclePlaces>(`circles/${circleId}/allplaces`);
+	}
+
+	/**
+	 * Gets location history for all members in a circle
+	 * @param circleId The ID of the circle
+	 */
+	async getCircleHistory(circleId: string) {
+		return this.get<Life360CircleLocations>(`circles/${circleId}/members/history`);
+	}
+
+	/**
+	 * Get all users in a circle
+	 * @param circleId The ID of the circle
+	 */
+	async getUsers(circleId: string) {
+		return this.get<Life360User>(`circles/${circleId}/members`);
+	}
+
+	/**
 	 * Gets a user in a circle
 	 * @param circleId The ID of the circle
 	 * @param userId The ID of the user
@@ -34,6 +61,31 @@ export class Life360API {
 		return this.get<Life360User>(`circles/${circleId}/members/${userId}`);
 	}
 
+	/**
+	 * Gets recent trips made by a user of the circle
+	 * @param circleId The ID of the circle
+	 * @param userId The ID of the user
+	 */
+	async getUserTrips(circleId: string, userId: string) {
+		return this.get<Life360UserTrips>(`circles/${circleId}/users/${userId}/driverbehavior/trips`);
+	}
+
+	/**
+	 * Gets a recent trip made by a user of the circle
+	 * @param circleId The ID of the circle
+	 * @param userId The ID of the user
+	 * @param tripId The ID of the trip
+	 */
+	async getUserTrip(circleId: string, userId: string) {
+		return this.get<Life360UserTrips>(
+			`circles/${circleId}/users/${userId}/driverbehavior/trips/${tripId}`
+		);
+	}
+
+	/**
+	 * Internal function to get data from the API
+	 * @param path The path to query
+	 */
 	protected async get<T>(path: string): Promise<T> {
 		return fetch(`https://api-cloudfront.life360.com/v3/${path}`, {
 			headers: {
