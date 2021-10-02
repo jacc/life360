@@ -37,6 +37,15 @@ export class Life360API {
 	}
 
 	/**
+	 * Gets a single place added in a circle
+	 * @param circleId The ID of the circle
+	 * @param placeID The ID of the place
+	 */
+	async getCirclePlace(circleId: string, placeId: string) {
+		return this.get<Life360CirclePlace>(`circles/${circleId}/places/${placeId}`);
+	}
+
+	/**
 	 * Gets location history for all members in a circle
 	 * @param circleId The ID of the circle
 	 */
