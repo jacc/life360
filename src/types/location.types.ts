@@ -1,7 +1,3 @@
-export interface Life360CircleLocations {
-	locations: Life360CircleLocation[];
-}
-
 export interface Life360CircleLocation {
 	latitude: string;
 	longitude: string;

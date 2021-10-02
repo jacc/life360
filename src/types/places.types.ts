@@ -1,7 +1,3 @@
-export interface Life360CirclePlaces {
-	places: Life360CirclePlace[];
-}
-
 export interface Life360CirclePlace {
 	id: string;
 	source: string;

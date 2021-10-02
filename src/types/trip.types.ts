@@ -1,7 +1,3 @@
-export interface Life360UserTrips {
-	trips: Life360UserTrip[];
-}
-
 export interface Life360UserTrip {
 	userId: string;
 	tripId: string;

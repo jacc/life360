@@ -1,9 +1,9 @@
 import fetch from 'node-fetch';
 import {Life360Circle} from './types/circles.types';
-import {Life360CircleLocations} from './types/location.types';
-import {Life360CirclePlaces} from './types/places.types';
+import {Life360CircleLocation} from './types/location.types';
+import {Life360CirclePlace} from './types/places.types';
 import {Life360User} from './types/users.types';
-import {Life360UserTrips} from './types/trip.types';
+import {Life360UserTrip} from './types/trip.types';
 
 export class Life360API {
 	private readonly token;
@@ -33,7 +33,7 @@ export class Life360API {
 	 * @param circleId The ID of the circle
 	 */
 	async getCirclePlaces(circleId: string) {
-		return this.get<Life360CirclePlaces>(`circles/${circleId}/allplaces`);
+		return this.get<Life360CirclePlace[]>(`circles/${circleId}/allplaces`);
 	}
 
 	/**
@@ -41,7 +41,7 @@ export class Life360API {
 	 * @param circleId The ID of the circle
 	 */
 	async getCircleHistory(circleId: string) {
-		return this.get<Life360CircleLocations>(`circles/${circleId}/members/history`);
+		return this.get<Life360CircleLocation[]>(`circles/${circleId}/members/history`);
 	}
 
 	/**
@@ -67,7 +67,7 @@ export class Life360API {
 	 * @param userId The ID of the user
 	 */
 	async getUserTrips(circleId: string, userId: string) {
-		return this.get<Life360UserTrips>(`circles/${circleId}/users/${userId}/driverbehavior/trips`);
+		return this.get<Life360UserTrip[]>(`circles/${circleId}/users/${userId}/driverbehavior/trips`);
 	}
 
 	/**
@@ -76,8 +76,8 @@ export class Life360API {
 	 * @param userId The ID of the user
 	 * @param tripId The ID of the trip
 	 */
-	async getUserTrip(circleId: string, userId: string) {
-		return this.get<Life360UserTrips>(
+	async getUserTrip(circleId: string, userId: string, tripId: string) {
+		return this.get<Life360UserTrip>(
 			`circles/${circleId}/users/${userId}/driverbehavior/trips/${tripId}`
 		);
 	}
