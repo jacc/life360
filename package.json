@@ -1,7 +1,7 @@
 {
 	"name": "life360",
 	"description": " Type-safe JavaScript library to unofficially interact with the Life360 API.",
-	"version": "1.0.0",
+	"version": "1.0.0-alpha",
 	"types": "./dist/index.d.ts",
 	"exports": {
 		"import": "./dist/index.js",
