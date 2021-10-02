@@ -10,6 +10,14 @@ export class Life360API {
 	}
 
 	/**
+	 * Gets all circles
+	 * @param circleId The ID of the circle
+	 */
+	async getCircles() {
+		return this.get<Life360Circle[]>('circles');
+	}
+
+	/**
 	 * Gets a circle
 	 * @param circleId The ID of the circle
 	 */
