@@ -4,6 +4,7 @@ import {Life360CircleLocation} from './types/location.types';
 import {Life360CirclePlace} from './types/places.types';
 import {Life360User} from './types/users.types';
 import {Life360UserTrip} from './types/trip.types';
+import {Life360CircleThread, Life360CircleThreads} from './types/threads.types';
 
 export class Life360API {
 	private readonly token;
@@ -51,6 +52,14 @@ export class Life360API {
 	 */
 	async getCircleHistory(circleId: string) {
 		return this.get<Life360CircleLocation[]>(`circles/${circleId}/members/history`);
+	}
+
+	/**
+	 * Gets location history for all members in a circle
+	 * @param circleId The ID of the circle
+	 */
+	async getCircleThreads() {
+		return this.get<Life360CircleThread[]>('circles/threads');
 	}
 
 	/**
