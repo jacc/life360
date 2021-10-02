@@ -3,7 +3,6 @@
 	"description": " Type-safe JavaScript library to unofficially interact with the Life360 API.",
 	"version": "1.0.0",
 	"types": "./dist/index.d.ts",
-	"type": "module",
 	"exports": {
 		"import": "./dist/index.js",
 		"require": "./dist/index.cjs"
@@ -21,10 +20,12 @@
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^4.32.0",
 		"@typescript-eslint/parser": "^4.32.0",
+		"dotenv": "^10.0.0",
 		"eslint": "^7.32.0",
 		"eslint-config-xo": "^0.38.0",
 		"eslint-config-xo-typescript": "^0.44.0",
 		"prettier": "^2.4.1",
+		"ts-node": "^10.2.1",
 		"tsup": "^5.2.1",
 		"typescript": "^4.4.3"
 	},
@@ -44,5 +45,8 @@
 	"keywords": [
 		"life360",
 		"life 360"
-	]
+	],
+	"dependencies": {
+		"node-fetch": "^3.0.0"
+	}
 }

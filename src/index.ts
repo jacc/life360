@@ -1,41 +1,36 @@
-import fetch, { Response } from "node-fetch";
-import { Life360User } from "./types/users.types";
+import fetch from 'node-fetch';
+import {Life360Circle} from './types/circles.types';
+import {Life360User} from './types/users.types';
 
-export default class Life360 {
-  private readonly token: string;
+export class Life360API {
+	private readonly token;
 
-  constructor(token: string) {
-    this.token = token;
-  }
+	constructor(token: string) {
+		this.token = token;
+	}
 
-  public async get(path: string): Promise<Response> {
-    return await fetch(`https://api-cloudfront.life360.com/v3/${path}`, {
-      headers: {
-        Authorization: `Bearer ${this.token}`,
-      },
-    });
-  }
+	/**
+	 * Gets a circle
+	 * @param circleId The ID of the circle
+	 */
+	async getCircle(circleId: string) {
+		return this.get<Life360Circle>(`circles/${circleId}`);
+	}
 
-  // // TODO: return array of typed circle objects
-  // public async getCircles(): Promise<Life360Response> {
-  //   const response = await this.get(`circles`);
-  //   const data = await response.json();
-  //   return data;
-  // }
-  //
-  // // TODO: return typed circle object
-  // public async getCircle(circleID: string): Promise<Life360Circle> {
-  //   const response = await this.get(`circles/${circleID}`);
-  //   const data = await response.json();
-  //   return data as Life360Circle;
-  // }
+	/**
+	 * Gets a user in a circle
+	 * @param circleId The ID of the circle
+	 * @param userId The ID of the user
+	 */
+	async getUser(circleId: string, userId: string) {
+		return this.get<Life360User>(`circles/${circleId}/members/${userId}`);
+	}
 
-  public async getUser(
-    circleID: string,
-    memberID: string
-  ): Promise<Life360User> {
-    const response = await this.get(`circles/${circleID}/members/${memberID}`);
-    const data = await response.json();
-    return data as Life360User;
-  }
+	protected async get<T>(path: string): Promise<T> {
+		return fetch(`https://api-cloudfront.life360.com/v3/${path}`, {
+			headers: {
+				Authorization: `Bearer ${this.token}`,
+			},
+		}).then(async res => res.json() as Promise<T>);
+	}
 }

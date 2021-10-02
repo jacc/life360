@@ -1,5 +1,6 @@
-import Life360 from "./src";
+import 'dotenv/config';
+import {Life360API} from './src';
 
-const life360 = new Life360(process.env.TOKEN);
+const life360 = new Life360API(process.env.TOKEN!);
 
-life360.getUser(process.env.CIRCLE, process.env.USER).then(console.log);
+void life360.getCircle(process.env.CIRCLE!).then(console.log);
