@@ -7,7 +7,6 @@ import {Life360UserTrip} from './types/trip.types';
 
 export class Life360API {
 	public static async login(username: string, password: string) {
-		console.log('Logging in...');
 		const request = await fetch('https://api-cloudfront.life360.com/v3/oauth2/token', {
 			method: 'POST',
 			headers: {
