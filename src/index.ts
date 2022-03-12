@@ -4,6 +4,7 @@ import {Life360CircleLocation} from './types/location.types';
 import {Life360CirclePlace} from './types/places.types';
 import {Life360User} from './types/users.types';
 import {Life360UserTrip} from './types/trip.types';
+import {Life360Premium} from './types/premium.types';
 
 export class Life360API {
 	public static async login(username: string, password: string) {
@@ -116,6 +117,10 @@ export class Life360API {
 		return this.get<Life360UserTrip>(
 			`circles/${circleId}/users/${userId}/driverbehavior/trips/${tripId}`
 		);
+	}
+
+	async getPremiumStatus(circleId: string) {
+		return this.get<Life360Premium>(`users/premium?circleId=${circleId}`);
 	}
 
 	/**
