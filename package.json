@@ -33,7 +33,8 @@
 	"scripts": {
 		"build": "tsup src/index.ts --dts --format esm,cjs",
 		"lint": "eslint ./src/**/*.ts",
-		"fix": "eslint ./src/**/*.ts --fix"
+		"fix": "eslint ./src/**/*.ts --fix",
+		"dev": "ts-node-dev --exit-child client.ts"
 	},
 	"bugs": {
 		"url": "https://github.com/jacc/life360/issues"
@@ -48,6 +49,7 @@
 		"life 360"
 	],
 	"dependencies": {
-		"node-fetch": "^2.6.1"
+		"node-fetch": "^2.6.1",
+		"ts-node-dev": "^1.1.8"
 	}
 }

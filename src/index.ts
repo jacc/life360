@@ -6,11 +6,48 @@ import {Life360User} from './types/users.types';
 import {Life360UserTrip} from './types/trip.types';
 
 export class Life360API {
-	private readonly token;
-
-	constructor(token: string) {
-		this.token = token;
+	public static async login(username: string, password: string) {
+		console.log('Logging in...');
+		const request = await fetch('https://api-cloudfront.life360.com/v3/oauth2/token', {
+			method: 'POST',
+			headers: {
+				Authorization:
+					'Basic YnJ1czR0ZXZhcHV0UmVadWNydUJSVXdVYnJFTUVDN1VYZTJlUEhhYjpSdUt1cHJBQ3JhbWVzV1UydVRyZVF1bXVtYTdhemFtQQ==',
+				'User-Agent': 'SafetyMapKoko/22.2.0.487/CBC47A39-34C3-43F2-9924-E7F1F928AC1C',
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
+			body: JSON.stringify({
+				grant_type: 'password',
+				username,
+				password,
+			}),
+		});
+		const response = await request.json();
+		return new Life360API(
+			response.access_token,
+			response.user.firstName,
+			response.user.lastName,
+			response.user.avatar,
+			response.user.loginEmail,
+			response.user.created
+		);
 	}
+
+	constructor(
+		private readonly token: string,
+		private readonly firstName: string,
+		private readonly lastName: string,
+		private readonly avatar: string,
+		private readonly loginEmail: string,
+		private readonly created: string
+	) {}
+
+	/**
+	 * Login to Life360 and get account information
+	 * @param username
+	 * @param password
+	 */
 
 	/**
 	 * Gets all circles
